@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оцените нашу работу</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f9f9f9; }
+        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; width: 90%; max-width: 400px; }
+        h2 { color: #333; margin-bottom: 1.5rem; }
+        .emojis { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+        .emoji { font-size: 2.5rem; cursor: pointer; transition: transform 0.2s; }
+        .emoji:hover { transform: scale(1.2); }
+        .hidden { display: none; }
+        textarea { width: 100%; height: 100px; margin-top: 10px; border-radius: 10px; border: 1px solid #ddd; padding: 10px; box-sizing: border-box; }
+        button { background: #ee252c; color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; margin-top: 10px; width: 100%; font-weight: bold; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 30px; height: 30px; animation: spin 2s linear infinite; margin: 10px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="card" id="mainCard">
+    <div id="step1">
+        <h2>Как вам качество обслуживания?</h2>
+        <div class="emojis">
+            <span class="emoji" onclick="handleRate(1)">😡</span>
+            <span class="emoji" onclick="handleRate(2)">☹️</span>
+            <span class="emoji" onclick="handleRate(3)">😐</span>
+            <span class="emoji" onclick="handleRate(4)">😊</span>
+            <span class="emoji" onclick="handleRate(5)">😍</span>
+        </div>
+    </div>
+
+    <div id="lowRating" class="hidden">
+        <h2>Что мы можем улучшить?</h2>
+        <form action="https://formspree.io/f/ВАШ_ID" method="POST">
+            <textarea name="feedback" placeholder="Напишите ваш отзыв здесь..." required></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <div id="highRating" class="hidden">
+        <h2>Спасибо за оценку! ❤️</h2>
+        <p>Нам будет очень приятно, если вы продублируете отзыв на Яндекс Картах.</p>
+        <div class="loader"></div>
+        <p style="font-size: 0.8rem; color: #888;">Сейчас вы будете перенаправлены...</p>
+    </div>
+</div>
+
+<script>
+    const YANDEX_MAPS_URL = "https://yandex.ru/maps/org/ВАША_ССЫЛКА"; // ЗАМЕНИТЕ НА ВАШУ
+
+    function handleRate(rating) {
+        document.getElementById('step1').classList.add('hidden');
+        
+        if (rating <= 3) {
+            document.getElementById('lowRating').classList.remove('hidden');
+        } else {
+            document.getElementById('highRating').classList.remove('hidden');
+            setTimeout(() => {
+                window.location.href = YANDEX_MAPS_URL;
+            }, 2500); // Редирект через 2.5 секунды
+        }
+    }
+</script>
+
+</body>
+</html>
