@@ -34,9 +34,15 @@
 
     <div id="lowRating" class="hidden">
         <h2>Что мы можем улучшить?</h2>
-        <form action="https://formspree.io/f/ВАШ_ID" method="POST">
-            <textarea name="feedback" placeholder="Напишите ваш отзыв здесь..." required></textarea>
-            <button type="submit">Отправить</button>
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="57fe8142-ead9-4991-a913-b91135281b01">
+            <input type="hidden" name="subject" value="Низкая оценка обслуживания">
+            
+            <input type="text" name="name" placeholder="Ваше имя" required>
+            <input type="email" name="phone" placeholder="Ваш телефон для связи" required>
+            <textarea name="message" placeholder="Опишите, что пошло не так..." required></textarea>
+            
+            <button type="submit">Отправить отзыв</button>
         </form>
     </div>
 
@@ -49,7 +55,7 @@
 </div>
 
 <script>
-    const YANDEX_MAPS_URL = "https://yandex.ru/maps/org/ВАША_ССЫЛКА"; // ЗАМЕНИТЕ НА ВАШУ
+    const YANDEX_MAPS_URL = "https://yandex.ru/maps/org/pervy_bit/4738450673/reviews/?add-review=true&ll=39.718813%2C47.222109&mode=search&sll=39.718813%2C47.222109&sspn=0.227966%2C0.120690&tab=reviews&text=%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%B1%D0%B8%D1%82&z=12"; // ЗАМЕНИТЕ НА ВАШУ
 
     function handleRate(rating) {
         document.getElementById('step1').classList.add('hidden');
