@@ -60,10 +60,10 @@
     </div>
 
     <div id="highRating" class="hidden">
-        <h2>Спасибо за оценку! ❤️</h2>
-        <p>Нам будет очень приятно, если вы продублируете отзыв на Яндекс Картах.</p>
+        <h2>Отлично! ❤️</h2>
+        <p>Оставьте отзыв на Яндекс Картах, отправьте скриншот Вашему менеджеру. В ответ мы отправим сертификат на Бит.Ассистент</p>
         <div class="loader"></div>
-        <p style="font-size: 0.8rem; color: #888;">Сейчас вы будете перенаправлены...</p>
+        <p style="font-size: 0.8rem; color: #888;"></p>
     </div>
 </div>
 
@@ -79,7 +79,7 @@
             document.getElementById('highRating').classList.remove('hidden');
             setTimeout(() => {
                 window.location.href = YANDEX_MAPS_URL;
-            }, 2500); // Редирект через 2.5 секунды
+            }, 10000); // Редирект через 10 секунд
         }
     }
 </script>
