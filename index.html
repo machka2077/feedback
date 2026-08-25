@@ -5,44 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Оцените нашу работу</title>
     <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111890194', 'ym');
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=111890194', 'ym');
 
-    ym(111890194, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/111890194" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+        ym(111890194, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/111890194" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .emojis {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .emoji {
+            font-size: 3rem;
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.2s;
+            user-select: none;
+            filter: grayscale(20%);
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .emoji:hover {
+            transform: scale(1.3);
+            filter: grayscale(0%);
+        }
+        .hidden {
+            display: none !important;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        input, textarea {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+        input:focus, textarea:focus {
+            border-color: #764ba2;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #764ba2;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .status-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .redirect-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .redirect-buttons button {
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+        .secondary-btn {
+            background: #6c757d;
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 30px 20px;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .emoji {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <div class="card" id="mainCard">
     <div id="step1">
         <h2>Как вам качество обслуживания?</h2>
-        <div class="emojis">
-            <span class="emoji" onclick="handleRate(1)">😡</span>
-            <span class="emoji" onclick="handleRate(2)">☹️</span>
-            <span class="emoji" onclick="handleRate(3)">😐</span>
-            <span class="emoji" onclick="handleRate(4)">😊</span>
-            <span class="emoji" onclick="handleRate(5)">😍</span>
+        <div class="emojis" role="group" aria-label="Оценка обслуживания">
+            <button class="emoji" onclick="handleRate(1)" aria-label="Очень плохо">😡</button>
+            <button class="emoji" onclick="handleRate(2)" aria-label="Плохо">☹️</button>
+            <button class="emoji" onclick="handleRate(3)" aria-label="Нормально">😐</button>
+            <button class="emoji" onclick="handleRate(4)" aria-label="Хорошо">😊</button>
+            <button class="emoji" onclick="handleRate(5)" aria-label="Отлично">😍</button>
         </div>
     </div>
 
     <div id="lowRating" class="hidden">
         <h2>Что мы можем улучшить?</h2>
-        <form action="https://api.web3forms.com/submit" method="POST">
+        <form id="feedbackForm" action="https://api.web3forms.com/submit" method="POST">
             <input type="hidden" name="access_key" value="57fe8142-ead9-4991-a913-b91135281b01">
             <input type="hidden" name="subject" value="Низкая оценка обслуживания">
             
-            <input type="text" name="name" placeholder="Ваше имя" required>
-            <input type="tel" name="phone" placeholder="Ваш телефон для связи" required>
-            <textarea name="message" placeholder="Опишите, что пошло не так..." required></textarea>
+            <input type="text" name="name" placeholder="Ваше имя" required aria-label="Имя">
+            <input type="tel" name="phone" placeholder="Ваш телефон для связи" required aria-label="Телефон">
+            <textarea name="message" placeholder="Опишите, что пошло не так..." required aria-label="Сообщение"></textarea>
             
-            <button type="submit">Отправить отзыв</button>
+            <button type="submit" id="submitBtn">Отправить отзыв</button>
+            <div id="formStatus" class="status-message hidden"></div>
         </form>
     </div>
 
@@ -50,25 +209,165 @@
         <h2>Отлично! ❤️</h2>
         <p>Оставьте отзыв на Яндекс Картах, отправьте скриншот Вашему менеджеру. В ответ мы отправим сертификат на Бит.Ассистент</p>
         <div class="loader"></div>
-        <p style="font-size: 0.8rem; color: #888;"></p>
+        <p style="font-size: 0.8rem; color: #888;">Перенаправляем на страницу отзывов...</p>
+        <div class="redirect-buttons">
+            <button id="redirectNow">Перейти сейчас</button>
+            <button id="cancelRedirect" class="secondary-btn">Отмена</button>
+        </div>
     </div>
+
+    <noscript>
+        <div style="background:#f8d7da; color:#721c24; padding:15px; border-radius:8px; margin-top:20px;">
+            Для работы сайта необходим JavaScript. Пожалуйста, включите его в настройках браузера.
+        </div>
+    </noscript>
 </div>
 
 <script>
-    const YANDEX_MAPS_URL = "https://yandex.ru/maps/org/pervy_bit/74836781634/reviews/?add-review=true&ll=39.609276%2C47.202394&mode=search&sll=39.718813%2C47.222109&sspn=0.306587%2C0.126771&tab=reviews&text=%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%B1%D0%B8%D1%82&z=13&utm_source=yandex&utm_medium=cpc&utm_campaign=bit_feedback"; // ЗАМЕНИТЕ НА ВАШУ
+    (function() {
+        // Константы
+        const YANDEX_MAPS_URL = "https://yandex.ru/maps/org/pervy_bit/74836781634/reviews/?add-review=true&ll=39.609276%2C47.202394&mode=search&sll=39.718813%2C47.222109&sspn=0.306587%2C0.126771&tab=reviews&text=%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D0%B9%20%D0%B1%D0%B8%D1%82&z=13&utm_source=yandex&utm_medium=cpc&utm_campaign=bit_feedback";
+        const REDIRECT_DELAY = 10000; // 10 секунд
+        let redirectTimer = null;
 
-    function handleRate(rating) {
-        document.getElementById('step1').classList.add('hidden');
-        
-        if (rating <= 3) {
-            document.getElementById('lowRating').classList.remove('hidden');
-        } else {
-            document.getElementById('highRating').classList.remove('hidden');
-            setTimeout(() => {
-                window.location.href = YANDEX_MAPS_URL;
-            }, 10000); // Редирект через 10 секунд
+        // Функция безопасного получения элемента
+        function getElement(id) {
+            const el = document.getElementById(id);
+            if (!el) {
+                console.error(`Элемент с id "${id}" не найден`);
+            }
+            return el;
         }
-    }
+
+        // Обработка рейтинга
+        window.handleRate = function(rating) {
+            const step1 = getElement('step1');
+            const lowRating = getElement('lowRating');
+            const highRating = getElement('highRating');
+
+            if (!step1 || !lowRating || !highRating) return;
+
+            step1.classList.add('hidden');
+            
+            if (rating <= 3) {
+                lowRating.classList.remove('hidden');
+            } else {
+                highRating.classList.remove('hidden');
+                startRedirectTimer();
+            }
+        };
+
+        // Запуск таймера редиректа
+        function startRedirectTimer() {
+            const highRating = getElement('highRating');
+            if (!highRating) return;
+
+            // Очищаем предыдущий таймер, если был
+            if (redirectTimer) {
+                clearTimeout(redirectTimer);
+            }
+
+            redirectTimer = setTimeout(() => {
+                window.location.href = YANDEX_MAPS_URL;
+            }, REDIRECT_DELAY);
+        }
+
+        // Отмена редиректа
+        function cancelRedirect() {
+            if (redirectTimer) {
+                clearTimeout(redirectTimer);
+                redirectTimer = null;
+            }
+            
+            const highRating = getElement('highRating');
+            if (highRating) {
+                highRating.querySelector('.loader')?.remove();
+                highRating.querySelector('p[style*="0.8rem"]')?.remove();
+                
+                const msg = document.createElement('p');
+                msg.textContent = 'Переход отменён. Вы можете перейти по кнопке ниже.';
+                msg.style.marginTop = '15px';
+                highRating.appendChild(msg);
+            }
+        }
+
+        // Немедленный редирект
+        function redirectNow() {
+            if (redirectTimer) {
+                clearTimeout(redirectTimer);
+                redirectTimer = null;
+            }
+            window.location.href = YANDEX_MAPS_URL;
+        }
+
+        // Навешиваем обработчики на кнопки после загрузки DOM
+        document.addEventListener('DOMContentLoaded', function() {
+            const redirectNowBtn = getElement('redirectNow');
+            const cancelRedirectBtn = getElement('cancelRedirect');
+
+            if (redirectNowBtn) {
+                redirectNowBtn.addEventListener('click', redirectNow);
+            }
+            if (cancelRedirectBtn) {
+                cancelRedirectBtn.addEventListener('click', cancelRedirect);
+            }
+
+            // Обработка отправки формы через AJAX
+            const form = getElement('feedbackForm');
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = getElement('submitBtn');
+                    const formStatus = getElement('formStatus');
+                    if (!submitBtn || !formStatus) return;
+
+                    // Проверяем валидность формы
+                    if (!form.checkValidity()) {
+                        form.reportValidity();
+                        return;
+                    }
+
+                    // Блокируем кнопку и показываем статус
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Отправка...';
+                    formStatus.classList.add('hidden');
+
+                    try {
+                        const formData = new FormData(form);
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            // Успех
+                            formStatus.textContent = 'Спасибо! Ваш отзыв отправлен.';
+                            formStatus.className = 'status-message status-success';
+                            form.reset();
+                        } else {
+                            throw new Error('Сервер вернул ошибку: ' + response.status);
+                        }
+                    } catch (error) {
+                        console.error('Ошибка отправки:', error);
+                        formStatus.textContent = 'Не удалось отправить отзыв. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону.';
+                        formStatus.className = 'status-message status-error';
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Отправить отзыв';
+                        formStatus.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+
+        // Экспортируем функции для использования в inline-обработчиках
+        window.cancelRedirect = cancelRedirect;
+        window.redirectNow = redirectNow;
+    })();
 </script>
 
 </body>
