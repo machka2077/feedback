@@ -23,41 +23,48 @@
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
+
         .card {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 40px 30px;
             width: 100%;
             max-width: 500px;
             text-align: center;
             animation: fadeIn 0.5s ease;
+            border: 1px solid #f0f0f0;
         }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         h2 {
             color: #333;
             margin-bottom: 30px;
             font-size: 1.8rem;
             font-weight: 600;
         }
+
         .emojis {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
         }
+
         .emoji {
             font-size: 3rem;
             cursor: pointer;
@@ -68,19 +75,23 @@
             border: none;
             padding: 0;
         }
+
         .emoji:hover {
             transform: scale(1.3);
             filter: grayscale(0%);
         }
+
         .hidden {
             display: none !important;
         }
+
         form {
             display: flex;
             flex-direction: column;
             gap: 15px;
             margin-top: 20px;
         }
+
         input, textarea {
             padding: 15px;
             border: 2px solid #e0e0e0;
@@ -89,13 +100,16 @@
             transition: border-color 0.3s;
             outline: none;
         }
+
         input:focus, textarea:focus {
             border-color: #764ba2;
         }
+
         textarea {
             resize: vertical;
             min-height: 120px;
         }
+
         button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -107,16 +121,19 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
+
         button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
+
         .loader {
             border: 5px solid #f3f3f3;
             border-top: 5px solid #764ba2;
@@ -126,43 +143,52 @@
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
         p {
             color: #555;
             font-size: 1rem;
             line-height: 1.5;
         }
+
         .status-message {
             margin-top: 15px;
             padding: 10px;
             border-radius: 8px;
             font-weight: 500;
         }
+
         .status-success {
             background: #d4edda;
             color: #155724;
         }
+
         .status-error {
             background: #f8d7da;
             color: #721c24;
         }
-        .redirect-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
+
+        .redirect-button {
             margin-top: 20px;
-        }
-        .redirect-buttons button {
-            padding: 10px 20px;
+            padding: 10px 25px;
             font-size: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .secondary-btn {
-            background: #6c757d;
+
+        .redirect-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.3);
         }
+
         @media (max-width: 480px) {
             .card {
                 padding: 30px 20px;
@@ -210,10 +236,7 @@
         <p>Оставьте отзыв на Яндекс Картах, отправьте скриншот Вашему менеджеру. В ответ мы отправим сертификат на Бит.Ассистент</p>
         <div class="loader"></div>
         <p style="font-size: 0.8rem; color: #888;">Перенаправляем на страницу отзывов...</p>
-        <div class="redirect-buttons">
-            <button id="redirectNow">Перейти сейчас</button>
-            <button id="cancelRedirect" class="secondary-btn">Отмена</button>
-        </div>
+        <button id="redirectNow" class="redirect-button">Перейти сейчас</button>
     </div>
 
     <noscript>
@@ -272,25 +295,6 @@
             }, REDIRECT_DELAY);
         }
 
-        // Отмена редиректа
-        function cancelRedirect() {
-            if (redirectTimer) {
-                clearTimeout(redirectTimer);
-                redirectTimer = null;
-            }
-            
-            const highRating = getElement('highRating');
-            if (highRating) {
-                highRating.querySelector('.loader')?.remove();
-                highRating.querySelector('p[style*="0.8rem"]')?.remove();
-                
-                const msg = document.createElement('p');
-                msg.textContent = 'Переход отменён. Вы можете перейти по кнопке ниже.';
-                msg.style.marginTop = '15px';
-                highRating.appendChild(msg);
-            }
-        }
-
         // Немедленный редирект
         function redirectNow() {
             if (redirectTimer) {
@@ -300,16 +304,11 @@
             window.location.href = YANDEX_MAPS_URL;
         }
 
-        // Навешиваем обработчики на кнопки после загрузки DOM
+        // Навешиваем обработчики после загрузки DOM
         document.addEventListener('DOMContentLoaded', function() {
             const redirectNowBtn = getElement('redirectNow');
-            const cancelRedirectBtn = getElement('cancelRedirect');
-
             if (redirectNowBtn) {
                 redirectNowBtn.addEventListener('click', redirectNow);
-            }
-            if (cancelRedirectBtn) {
-                cancelRedirectBtn.addEventListener('click', cancelRedirect);
             }
 
             // Обработка отправки формы через AJAX
@@ -365,7 +364,6 @@
         });
 
         // Экспортируем функции для использования в inline-обработчиках
-        window.cancelRedirect = cancelRedirect;
         window.redirectNow = redirectNow;
     })();
 </script>
